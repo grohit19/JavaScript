@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Tweet Box</title>
+<style type="text/css">
+#textBox {
+	text-align: center;
+	margin-top: 25px;
+}
+textarea {
+	border: 2px double #5C44D3;
+}
+.red {
+	color: red;
+}
+.black {
+	color: black;
+}
+</style>
+<link rel="stylesheet" href=
+"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity=
+"sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+crossorigin="anonymous">
+</head>
+<style type="text/css"></style>
+<body>
+<div class="container">
+  <div class="row">
+    <div id="textBox"> 
+      <!-- textarea to enter the tweet-->
+      <textarea name="tweetText" id="tweetBox" cols="60" rows="5" placeholder="What's on your mind ?" onKeyDown="textCounter();" onKeyUp="textCounter();" onKeyPress="textCounter();" onChange="textCounter();"></textarea>
+    </div>
+    <div id="output" align="center" class="black"> 
+      <!--    The output will be displyed inside this div--> 
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    var output = document.getElementById('output');
+    var charCount = 140;
+    var textAreaLimit = 140; //var to use for limiting text 
+    //function to count the number of characters in the twet box
+    
+    function textCounter(){
+     //   console.log("It's working " ); //to check if code is working on console.
+        
+		var fieldValue = document.getElementById('tweetBox'); // var to get the field value of tweetbox
+        var count = charCount - fieldValue.value.length; //to be used of rdiaplying the message on how many char left
+		
+		var lettersSofar = fieldValue.value.length; // to get the no of char typed so far inside the box
+       
+        //this if else will check if typed char are more than 140, it will limit the further char by using sub string method
+		
+        if (  lettersSofar > textAreaLimit) {
+          console.log(fieldValue.value.substring(0,textAreaLimit));
+			fieldValue.value= fieldValue.value.substring(0,textAreaLimit);
+        }
+        
+        //this if else will turn the output messgage into red if no of char left are 10 or less.
+        if (count <= 10 ){
+            output.classList.add("red");
+                        output.classList.remove("black");
+          // console.log('checking if condition');
+        } else{
+             output.classList.add("black");
+                        output.classList.remove("red");
+
+        }
+       //this will display - how many characters left while writing
+        output.innerHTML= count + ' characters left'; // to display the number of char in the box
+    
+    }
+    </script>
+</body>
+</html>
